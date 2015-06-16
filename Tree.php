@@ -19,30 +19,31 @@ class Tree extends Widget
 		$this->root = $this->nodebuilder->getNode();
 	}
 	public function run(){
-		$this->getHtmlCode();
-		return $this->html;
+		return $this->getHtmlCode();
 	}
 	protected function initTree($items,&$root){
 		foreach ($items as $v) {
-			if(isset($v['visable']) && !$v['visable']){
+			if(isset($v['visible']) && !$v['visible']){
 				continue;
 			}
 			if(isset($v['menus']) && $v['menus']){
 				$_t = $v['menus'];
 				unset($v['menus']);
-				\Yii::$app->mylog->doLog($v);
 				$tree = $root->tree($v);
 				$this->initTree($_t,$tree);
 				$tree->end();
 				continue;
 			}
-			\Yii::$app->mylog->doLog($v);
 			$root->leaf($v);
 		}
 	}
 	public function getHtmlCode(){
 		$visitor = new TreeVisitor();
 
-		return $this->root->accept($visitor);
+		$res = $this->root->accept($visitor);
+		$class = isset($this->options['class'])?$this->options['class']:'tree treeFolder';
+		$res[0] = '<ul class="'.$class.'">';
+		$res = implode('', $res);
+		return $res;
 	}
 }

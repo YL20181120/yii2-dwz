@@ -14,25 +14,26 @@ class TreeVisitor implements Visitor
 	public function visit(\yii\dwz\tree\Node\NodeInterface $node) {
 		if ($node->isLeaf()) {
 			$value = $node->getValue();
-            return [Html::tag('li',Html::a($value['label'],$value['url'],['target'=>'navTab','rel'=>$this->generateId()]))];
+            return [Html::tag('li',Html::a($value['label'],$value['url'],['target'=>'navTab','rel'=>$this->generateId($value['label'])]))];
         }
 
         $yield = [];
-
-        $yield = array_merge($yield, ['<li><a>'.$node->getValue()['label'].'</a>']);
+        if(!$node->isRoot()){
+            $yield = array_merge($yield, ['<li><a>'.$node->getValue()['label'].'</a>']);
+        }
         $yield = array_merge($yield, ['<ul>']);
 
         foreach ($node->getChildren() as $child) {
             $yield = array_merge($yield, $child->accept($this));
         }
         $yield = array_merge($yield, ['</ul>']);
-        $yield = array_merge($yield, ['</li>']);
-
-
+        if(!$node->isRoot()){
+            $yield = array_merge($yield, ['</li>']);
+        }
         return $yield;
 	}
 
-	protected function generateId(){
-		return \Yii::$app->security->generateRandomString();
+	protected function generateId($label){
+		return '_'.crc32($label);
 	}
 }

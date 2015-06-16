@@ -6,11 +6,10 @@ use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-
+use yii\dwz\Tree;
 class Nav extends Widget
 {
 	public $items = [];
-	public $_items = [];
 
 	public $params;
 
@@ -26,53 +25,16 @@ class Nav extends Widget
 	}
 	public function run(){
 		DwzAsset::register($this->getView());
-		$this->renderItems($this->items);
-		//return Html::tag('div',$this->_items,['class'=>'accordion','fillSpace'=>'sidebar']);
-		var_dump($this->_items);
+		return $this->render();
 	}
 
-	public function renderItems($_items){
-        foreach ($_items as $i => $item) {
-        	//判断是否为叶子节点
-            if (isset($item['visible']) && !$item['visible']) {
-                continue;
-            } elseif(isset($item['menus']) && count($item['menus'])){
-            	$_t = $item['menus'];
-            	unset($item['menus']);
-            	$this->_items[] = $item;
-            	$this->_items[count($this->_items) - 1]['menus'] = $this->initItem($item);
-            	$this->renderItems($_t);
-            	continue;
-            }
-            $this->_items[] = $this->initItem($item);
-        }
-	}
+	public function render(){
+		$ret = '';
 
-	public function initItem($item){
-		if(!isset($item))
-			return false;
-		if(is_string($item)){
-			return $item;
+		foreach ($this->items as $v) {
+			$ret .= Html::tag('div',Html::tag('h2',Html::tag('span','Folder').$v['label']),['class'=>'accordionHeader']);
+			$ret .= Html::tag('div',Tree::widget(['items' => $v['menus'],'options'=>$this->options]),['class'=>'accordionContent']);
 		}
-		if(!isset($item['label'])){
-			throw new InvalidConfigException("The 'label' option is required.");
-		}
-		return $item;
-	}
-	//普通顶结点
-	protected function renderRoot($item){
-		return Html::tag('div',Html::tag('h2',Html::tag('span','Folder').$item['label']));
-	}
-	//叶子节点
-	protected function renderLeaf($item){
-		return Html::tag('li',Html::a($item['label'],$item['url'],['target'=>'navTab']));
-	}
-
-	//中间节点,应该还有子节点
-	protected function renderMiddle($item) {
-		$content = '';
-		foreach ($item['menus'] as $value) {
-			
-		}
+		return $ret;
 	}
 }
