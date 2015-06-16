@@ -13,7 +13,7 @@ namespace yii\dwz\tree\Node;
 /**
  * Class Node
  */
-class Node implements NodeInterface
+class Node /*extends \yii\base\Component*/ implements NodeInterface
 {
     use NodeTrait;
 }
