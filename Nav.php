@@ -39,15 +39,16 @@ class Nav extends Widget
             } elseif(isset($item['menus']) && count($item['menus'])){
             	$_t = $item['menus'];
             	unset($item['menus']);
-            	$this->_items[] = $this->renderItem($item);
+            	$this->_items[] = $item;
+            	$this->_items[count($this->_items) - 1]['menus'] = $this->initItem($item);
             	$this->renderItems($_t);
             	continue;
             }
-            $this->_items[] = $this->renderItem($item);
+            $this->_items[] = $this->initItem($item);
         }
 	}
 
-	public function renderItem($item){
+	public function initItem($item){
 		if(!isset($item))
 			return false;
 		if(is_string($item)){
@@ -69,6 +70,9 @@ class Nav extends Widget
 
 	//中间节点,应该还有子节点
 	protected function renderMiddle($item) {
-
+		$content = '';
+		foreach ($item['menus'] as $value) {
+			
+		}
 	}
 }
