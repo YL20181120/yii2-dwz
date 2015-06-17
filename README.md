@@ -35,4 +35,13 @@ Panel::begin(['title'=>'Panel Title','class'=>'panel collapse close']);
 Panel::end();
 ?>
 ```
-
+2.Tabs 标签页
+```php
+<?php
+use yii\dwz\Tabs;
+echo Tabs::widget(['items'=>[
+		['title'=>'t1','url'=>'','content'=>'t1 content'],
+		['title'=>'t2','url'=>['user/index'],'content'=>'']
+	],'contentStyle'=>'height:300px']);
+?>
+```
