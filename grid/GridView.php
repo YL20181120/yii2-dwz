@@ -3,7 +3,7 @@ namespace yii\dwz\grid;
 /**
 * 
 */
-class Grid extends Widget
+class GridView extends Widget
 {
 
 }
