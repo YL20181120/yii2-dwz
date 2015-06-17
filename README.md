@@ -34,4 +34,5 @@ Panel::begin(['title'=>'Panel Title','class'=>'panel collapse close']);
 <?php
 Panel::end();
 ?>
+```
 
