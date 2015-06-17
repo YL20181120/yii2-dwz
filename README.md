@@ -24,8 +24,14 @@ to the require section of your `composer.json` file.
 
 Usage
 -----
-
-Once the extension is installed, simply use it in your code by  :
-
+1.Panel 面板
 ```php
-<?= \yii\dwz\AutoloadExample::widget(); ?>```
+<?php
+use yii\dwz\Panel;
+Panel::begin(['title'=>'Panel Title','class'=>'panel collapse close']);
+?>
+<table></table>
+<?php
+Panel::end();
+?>```
+
