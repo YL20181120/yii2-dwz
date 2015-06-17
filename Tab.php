@@ -2,7 +2,7 @@
 namespace yii\dwz;
 use yii\helpers\Html;
 /**
-* 
+* Tab标签页
 */
 class Tab extends \yii\base\Object
 {
