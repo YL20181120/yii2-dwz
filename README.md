@@ -21,7 +21,6 @@ or add
 
 to the require section of your `composer.json` file.
 
-
 Usage
 -----
 1.Panel 面板
