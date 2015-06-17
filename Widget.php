@@ -6,6 +6,7 @@ namespace yii\dwz;
 */
 class Widget extends \yii\base\Widget
 {
+
 	public $options = [];
 
 	public function init(){

@@ -1,5 +1,6 @@
 <?php
 namespace yii\dwz;
+use yii\helpers\Html;
 use yii\dwz\tree\Node\Node;
 use yii\dwz\tree\Builder\NodeBuilder;
 use yii\dwz\tree\Node\NodeInterface;
@@ -41,8 +42,9 @@ class Tree extends Widget
 		$visitor = new TreeVisitor();
 
 		$res = $this->root->accept($visitor);
-		$class = isset($this->options['class'])?$this->options['class']:'tree treeFolder';
-		$res[0] = '<ul class="'.$class.'">';
+		if(!isset($this->options['class']))
+			$this->options['class'] = 'tree treeFolder';
+		$res[0] = Html::beginTag('ul',$this->options);
 		$res = implode('', $res);
 		return $res;
 	}
