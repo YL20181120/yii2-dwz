@@ -7,7 +7,7 @@ use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\dwz\Tree;
-class Nav extends Widget
+class Accordion extends Widget
 {
 	public $items = [];
 
