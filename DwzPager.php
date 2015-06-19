@@ -11,12 +11,6 @@ class DwzPager extends LinkPager
 	public $target  = 'navTab';
 	public $count = 0;
 	public $pageNumShown = 10;
-    public function run(){
-        $view = $this->getView();
-        \yii\dwz\DwzAsset::register($view);
-        $view->registerJs("console.log('dd')");
-        parent::run();
-    }
 	protected function renderPageButtons()
     {
         $pageCount = $this->pagination->getPageCount();
