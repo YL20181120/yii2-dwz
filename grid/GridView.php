@@ -13,18 +13,17 @@ class GridView extends Grid
 {
 	public $rel;
 	public $summary = false;
-	public $tableOptions = ['class' => 'table','style' => 'width:100%;','layoutH'=>'49'];
-	public $pagesize = 100;
+	public $tableOptions = ['class' => 'table','style' => 'width:100%;','layoutH'=>'50'];
 	public function init(){
 		parent::init();
-		$pagination = $this->dataProvider->getPagination();
-		$pagination->pageParam = 'pageNum';
-		$pagination->setPageSize($this->pagesize);
+		$pagination = new Pagination();
+		$this->dataProvider->setPagination($pagination);
 	}
 	public function renderSummary(){
 		if($this->summary){
 			$form = ActiveForm::begin(['id'=>'pagerForm','method'=>'post']);
 			echo '<input type="hidden" name="pageNum" value="1" />';
+			echo '<input type="hidden" name="numPerPage" value="'.$this->dataProvider->getPagination()->getPageSize().'"/>';
 			ActiveForm::end();
 		} else {
 			return null;
