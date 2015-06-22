@@ -11,11 +11,13 @@ use yii\widgets\ActiveForm;
 use yii\dwz\Pagination;
 class GridView extends Grid
 {
-	public $rel;
-	public $summary = false;
-	public $tableOptions = ['class' => 'table','style' => 'width:100%;','layoutH'=>'50'];
+	//排序字段
+	public $sortColumns = false;
+	public $summary = true;
+	public $tableOptions = ['class' => 'list','style' => 'width:100%;','layoutH'=>'50','asc'=>'asc','desc'=>'desc'];
 	public function init(){
 		parent::init();
+
 		$pagination = new Pagination();
 		$this->dataProvider->setPagination($pagination);
 	}
@@ -24,20 +26,34 @@ class GridView extends Grid
 			$form = ActiveForm::begin(['id'=>'pagerForm','method'=>'post']);
 			echo '<input type="hidden" name="pageNum" value="1" />';
 			echo '<input type="hidden" name="numPerPage" value="'.$this->dataProvider->getPagination()->getPageSize().'"/>';
+			echo '<input type="hidden" name="orderField" value="${param.orderField}" />';
+			echo '<input type="hidden" name="orderDirection" value="${param.orderDirection}" />';
 			ActiveForm::end();
 		} else {
 			return null;
 		}
 	}
-
+    protected function createDataColumn($text,$options = [])
+    {
+        if (!preg_match('/^([^:]+)(:(\w*))?(:(.*))?$/', $text, $matches)) {
+            throw new InvalidConfigException('The column must be specified in the format of "attribute", "attribute:format" or "attribute:format:label"');
+        }
+        $options['headerOptions']['orderfield']  = $matches[1];
+        return Yii::createObject(array_merge([
+            'class' => $this->dataColumnClass ? : DataColumn::className(),
+            'grid' => $this,
+            'attribute' => $matches[1],
+            'format' => isset($matches[3]) ? $matches[3] : 'text',
+            'label' => isset($matches[5]) ? $matches[5] : null,
+        ],$options));
+    }
 	protected function initColumns(){
         if (empty($this->columns)) {
             $this->guessColumns();
         }
         foreach ($this->columns as $i => $column) {
             if (is_string($column)) {
-            	$column = array_merge([$column],[['data-method'=>'post','target' => 'navTab','rel' => $this->rel]]);
-                $column = $this->createDataColumn($column);
+                $column = $this->createDataColumn($column,['enableSorting'=>false,'headerOptions'=>['class'=>'asc','style'=>'cursor:pointer;']]);
             } else {
                 $column = Yii::createObject(array_merge([
                     'class' => $this->dataColumnClass ? : DataColumn::className(),
@@ -51,21 +67,6 @@ class GridView extends Grid
             $this->columns[$i] = $column;
         }		
 	}
-	protected function createDataColumn($text = [])
-    {
-        if (!preg_match('/^([^:]+)(:(\w*))?(:(.*))?$/', $text[0], $matches)) {
-            throw new InvalidConfigException('The column must be specified in the format of "attribute", "attribute:format" or "attribute:format:label"');
-        }
-
-        return Yii::createObject([
-            'class' => $this->dataColumnClass ? : DataColumn::className(),
-            'grid' => $this,
-            'attribute' => $matches[1],
-            'format' => isset($matches[3]) ? $matches[3] : 'text',
-            'label' => isset($matches[5]) ? $matches[5] : null,
-            'sortLinkOptions' => array_merge($text[1],['orderField'=>$matches[1]]),
-        ]);
-    }
 	public function renderPager(){
 		$pagination = $this->dataProvider->getPagination();
         if ($pagination === false || $this->dataProvider->getCount() <= 0) {
