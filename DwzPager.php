@@ -31,7 +31,7 @@ class DwzPager extends LinkPager
     }
 
     protected function renderPagers($numPerPage){
-    	$_t1 = '<div class=v"pages">
+    	$_t1 = '<div class="pages">
 			<span>显示</span>
 			<select name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">';
             $_t2 = '';

@@ -2,7 +2,7 @@
 namespace yii\dwz\grid;
 use Yii;
 use yii\grid\GridView as Grid;
-use yii\grid\DataColumn;
+use yii\dwz\grid\DataColumn;
 use yii\dwz\DwzPager;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -14,7 +14,7 @@ class GridView extends Grid
 	//排序字段
 	public $sortColumns = false;
 	public $summary = true;
-	public $tableOptions = ['class' => 'list','style' => 'width:100%;','layoutH'=>'50','asc'=>'asc','desc'=>'desc'];
+	public $tableOptions = ['class' => 'list','style' => 'width:100%;','layoutH'=>'28','asc'=>'asc','desc'=>'desc'];
 	public function init(){
 		parent::init();
 
@@ -38,7 +38,13 @@ class GridView extends Grid
         if (!preg_match('/^([^:]+)(:(\w*))?(:(.*))?$/', $text, $matches)) {
             throw new InvalidConfigException('The column must be specified in the format of "attribute", "attribute:format" or "attribute:format:label"');
         }
-        $options['headerOptions']['orderfield']  = $matches[1];
+        if($this->sortColumns) {
+            if(in_array($matches[1], $this->sortColumns))
+                $options['headerOptions'] = [
+                    'orderfield' => $matches[1],
+                    'class' => 'desc',
+                ];
+        }
         return Yii::createObject(array_merge([
             'class' => $this->dataColumnClass ? : DataColumn::className(),
             'grid' => $this,
@@ -53,7 +59,8 @@ class GridView extends Grid
         }
         foreach ($this->columns as $i => $column) {
             if (is_string($column)) {
-                $column = $this->createDataColumn($column,['enableSorting'=>false,'headerOptions'=>['class'=>'asc','style'=>'cursor:pointer;']]);
+                $options = ['enableSorting'=>false];
+                $column = $this->createDataColumn($column,$options);
             } else {
                 $column = Yii::createObject(array_merge([
                     'class' => $this->dataColumnClass ? : DataColumn::className(),
