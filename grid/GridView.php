@@ -59,8 +59,7 @@ class GridView extends Grid
         }
         foreach ($this->columns as $i => $column) {
             if (is_string($column)) {
-                $options = ['enableSorting'=>false];
-                $column = $this->createDataColumn($column,$options);
+                $column = $this->createDataColumn($column);
             } else {
                 $column = Yii::createObject(array_merge([
                     'class' => $this->dataColumnClass ? : DataColumn::className(),
