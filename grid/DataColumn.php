@@ -8,7 +8,7 @@ class DataColumn extends \yii\grid\Column
 {
 	public $attribute;
 
-	public $format;
+	public $format = 'text';
 
 	public $label;
 

@@ -45,6 +45,7 @@ class GridView extends Grid
                     'class' => 'desc',
                 ];
         }
+        var_dump($this->dataColumnClass);
         return Yii::createObject(array_merge([
             'class' => $this->dataColumnClass ? : DataColumn::className(),
             'grid' => $this,
