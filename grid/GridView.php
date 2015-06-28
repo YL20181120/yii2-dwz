@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\dwz\Pagination;
+use yii\dwz\data\Sort;
 class GridView extends Grid
 {
 	//排序字段
@@ -20,6 +21,7 @@ class GridView extends Grid
 
 		$pagination = new Pagination();
 		$this->dataProvider->setPagination($pagination);
+        $this->dataProvider->setSort(new Sort());
 	}
 	public function renderSummary(){
 		if($this->summary){
