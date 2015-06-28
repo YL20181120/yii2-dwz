@@ -13,12 +13,17 @@ use yii\dwz\data\Sort;
 class GridView extends Grid
 {
 	//排序字段
+    public $layoutH = 100;
 	public $sortColumns = false;
 	public $summary = true;
-    public $tableOptions = ['class' => 'list','style' => 'width:100%;','layoutH'=>'28','asc'=>'asc','desc'=>'desc'];
+    public $tableOptions = ['class' => 'list','style' => 'width:100%;','asc'=>'asc','desc'=>'desc'];
+
+    public $filterPosition = self::FILTER_POS_HEADER;
 	public function init(){
 		parent::init();
-
+        $this->tableOptions['layoutH'] = $this->layoutH;
+        $this->layout = "<div id='w_list_print'>{summary}\n{items}\n{pager}</div>";
+        $this->options['class'] = 'pageContent';
 		$pagination = new Pagination();
 		$this->dataProvider->setPagination($pagination);
         $this->dataProvider->setSort(new Sort());
@@ -87,4 +92,39 @@ class GridView extends Grid
         $pager['count']= $this->dataProvider->getTotalCount();
         return $class::widget($pager);
 	}
+
+
+    public function renderFilters(){
+        if ($this->filterModel !== null) {
+            $cells = [];
+            foreach ($this->columns as $column) {
+                /* @var $column Column */
+                $cells[] = $column->renderFilterCell();
+            }
+            var_dump($cells);
+            echo Html::beginTag('div',['class' => 'pageHeader']);
+
+            echo Html::beginTag('div',['class' => 'searchBar']);
+            echo '<ul class="searchContent">
+                <li>
+                    <label>我的客户：</label>
+                    <input type="text" name="keywords"/>
+                </li>
+                <li>
+                <select class="combox" name="province">
+                    <option value="">所有省市</option>
+                    <option value="北京">北京</option>
+                    <option value="上海">上海</option>
+                    <option value="天津">天津</option>
+                    <option value="重庆">重庆</option>
+                    <option value="广东">广东</option>
+                </select>
+                </li>
+            </ul>';
+            echo Html::endTag('div');
+            echo Html::endTag('div');
+        } else {
+            return '';
+        }
+    }
 }

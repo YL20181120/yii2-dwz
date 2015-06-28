@@ -9,22 +9,8 @@ use yii\helpers\Html;
 /**
 * 
 */
-class DataColumn extends \yii\grid\Column
+class DataColumn extends \yii\grid\DataColumn
 {
-	public $attribute;
-
-	public $format = 'text';
-
-	public $label;
-
-	public $enableSorting = true;
-
-	public $encodeLabel = true;
-
-	public $value;
-
-    public $headerOptions = [];
-
 	public function renderHeaderCellContent(){
 		if ($this->header !== null || $this->label === null && $this->attribute === null) {
             return parent::renderHeaderCellContent();
@@ -99,6 +85,35 @@ class DataColumn extends \yii\grid\Column
             return $this->grid->formatter->format($this->getDataCellValue($model, $key, $index), $this->format);
         } else {
             return parent::renderDataCellContent($model, $key, $index);
+        }
+    }
+    public function renderFilterCell()
+    {
+        return Html::tag('td', $this->renderFilterCellContent(), $this->filterOptions);
+    }
+    protected function renderFilterCellContent()
+    {
+        if (is_string($this->filter)) {
+            return $this->filter;
+        }
+
+        $model = $this->grid->filterModel;
+
+        if ($this->filter !== false && $model instanceof Model && $this->attribute !== null && $model->isAttributeActive($this->attribute)) {
+            if ($model->hasErrors($this->attribute)) {
+                Html::addCssClass($this->filterOptions, 'has-error');
+                $error = ' ' . Html::error($model, $this->attribute, $this->grid->filterErrorOptions);
+            } else {
+                $error = '';
+            }
+            if (is_array($this->filter)) {
+                $options = array_merge(['prompt' => ''], $this->filterInputOptions);
+                return Html::activeDropDownList($model, $this->attribute, $this->filter, $options) . $error;
+            } else {
+                return Html::activeTextInput($model, $this->attribute, $this->filterInputOptions) . $error;
+            }
+        } else {
+            return parent::renderFilterCellContent();
         }
     }
 }
