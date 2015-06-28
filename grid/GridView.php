@@ -14,7 +14,7 @@ class GridView extends Grid
 	//排序字段
 	public $sortColumns = false;
 	public $summary = true;
-	public $tableOptions = ['class' => 'list','style' => 'width:100%;','layoutH'=>'28','asc'=>'asc','desc'=>'desc'];
+    public $tableOptions = ['class' => 'list','style' => 'width:100%;','layoutH'=>'28','asc'=>'asc','desc'=>'desc'];
 	public function init(){
 		parent::init();
 
