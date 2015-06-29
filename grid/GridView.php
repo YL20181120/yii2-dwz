@@ -12,7 +12,7 @@ use yii\dwz\Pagination;
 use yii\dwz\data\Sort;
 class GridView extends Grid
 {
-	//排序字段
+	public $searchForm = [];
     public $layoutH = 100;
 	public $sortColumns = false;
 	public $summary = true;
@@ -30,7 +30,7 @@ class GridView extends Grid
 	}
 	public function renderSummary(){
 		if($this->summary){
-			$form = ActiveForm::begin(['id'=>'pagerForm','method'=>'post']);
+			$form = ActiveForm::begin(['id'=>'pagerForm','method'=>'post','options'=>['onsubmit' => 'return navTabSearch(this);']]);
 			echo '<input type="hidden" name="pageNum" value="1" />';
 			echo '<input type="hidden" name="numPerPage" value="'.$this->dataProvider->getPagination()->getPageSize().'"/>';
 			echo '<input type="hidden" name="orderField" value="${param.orderField}" />';
@@ -92,39 +92,4 @@ class GridView extends Grid
         $pager['count']= $this->dataProvider->getTotalCount();
         return $class::widget($pager);
 	}
-
-
-    public function renderFilters(){
-        if ($this->filterModel !== null) {
-            $cells = [];
-            foreach ($this->columns as $column) {
-                /* @var $column Column */
-                $cells[] = $column->renderFilterCell();
-            }
-            var_dump($cells);
-            echo Html::beginTag('div',['class' => 'pageHeader']);
-
-            echo Html::beginTag('div',['class' => 'searchBar']);
-            echo '<ul class="searchContent">
-                <li>
-                    <label>我的客户：</label>
-                    <input type="text" name="keywords"/>
-                </li>
-                <li>
-                <select class="combox" name="province">
-                    <option value="">所有省市</option>
-                    <option value="北京">北京</option>
-                    <option value="上海">上海</option>
-                    <option value="天津">天津</option>
-                    <option value="重庆">重庆</option>
-                    <option value="广东">广东</option>
-                </select>
-                </li>
-            </ul>';
-            echo Html::endTag('div');
-            echo Html::endTag('div');
-        } else {
-            return '';
-        }
-    }
 }
