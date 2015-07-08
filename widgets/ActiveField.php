@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 
 class ActiveField extends \yii\widgets\ActiveField
 {
+	public $template = "<dl><dt>{label}</dt>\n<dd>{input}</dd>\n{hint}\n{error}</dl>";
 	public $inputOptions = ['class' => 'textInput'];
 	public function label($label = null, $options = []){
 		return $label;
@@ -15,7 +16,6 @@ class ActiveField extends \yii\widgets\ActiveField
 		$options = array_merge($this->inputOptions, $options);
         $this->adjustLabelFor($options);
         $this->parts['{input}'] = Html::activeTextInput($this->model, $this->attribute, $options);
-
         return $this;
 	}
 }

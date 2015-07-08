@@ -8,15 +8,15 @@ use \yii\base\InvalidParamException;
 */
 class Button extends Widget
 {
-	public $content;
+	public $content = 'Button';
 
 	public $buttonOptions = [];
 	public $type = 'button';
 
-	const _TYPE = ['button','active','disabled'];
+	public $_TYPE = ['button','active','disabled'];
 	public function init(){
-		if(!in_array($this->type, self::_TYPE))
-			throw new InvalidParamException("Param type must in range '".implode(' ', self::_TYPE)."'",1);
+		if(!in_array($this->type, $this->_TYPE))
+			throw new InvalidParamException("Param type must in range '".implode(' ', $this->_TYPE)."'",1);
 	}
 	public function run(){
 		switch ($this->type) {
