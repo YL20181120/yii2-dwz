@@ -14,11 +14,11 @@ class Alert extends Widget
 
 	public $content;
 
-	const CLASS_RANGE = ['info','warning','success','error','javascript'];
+	private $CLASS_RANGE = ['info','warning','success','error','javascript'];
 	public function init(){
 		parent::init();
-		if(!in_array($this->type, self::CLASS_RANGE))
-			throw new InvalidParamException("Param type must in range '".implode(' ', self::CLASS_RANGE)."'",1);
+		if(!in_array($this->type, $this->CLASS_RANGE))
+			throw new InvalidParamException("Param type must in range '".implode(' ', $this->CLASS_RANGE)."'",1);
 		if($this->content == null || $this->content == "")
 			throw new InvalidParamException("content can not be null",1);
 	}
