@@ -16,7 +16,6 @@ class Alert extends Widget
 
 	const CLASS_RANGE = ['info','warning','success','error','javascript'];
 	public function init(){
-		parent::init();
 		if(!in_array($this->type, self::CLASS_RANGE))
 			throw new InvalidParamException("Param type must in range '".implode(' ', self::CLASS_RANGE)."'",1);
 		if($this->content == null || $this->content == "")
