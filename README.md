@@ -44,7 +44,7 @@ echo Tabs::widget(['items'=>[
 	],'contentStyle'=>'height:300px']);
 ?>
 ```
-3.ALert 弹出提示
+3.Alert 弹出提示
 ```php
 <?php
 echo Alert::widget([
