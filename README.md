@@ -44,3 +44,46 @@ echo Tabs::widget(['items'=>[
 	],'contentStyle'=>'height:300px']);
 ?>
 ```
+3.ALert 弹出提示
+```php
+<?php
+echo Alert::widget([
+	'type'   => 'error',
+	'content' => 'error',
+	'message' => '您的数据提交成功！'
+	]);
+?><br>
+<?php echo Alert::widget([
+	'type'   => 'success',
+	'content' => 'success',
+	'message' => '您的数据提交成功！'
+	]);
+?><br>
+<?php
+echo Alert::widget([
+	'type'   => 'warning',
+	'content' => 'warning',
+	'message' => '您的数据提交成功！'
+	]);
+?><br>
+<?php
+echo Alert::widget([
+	'type'   => 'info',
+	'content' => 'info',
+	'message' => '您的数据提交成功！'
+	]);
+?><br>
+<?php
+echo Alert::widget([
+	'type'   => 'javascript',
+	'content' => '自定义JAVASCRIPT',
+	'message' => 'test()'
+	]);
+?><br>
+
+<script type="text/javascript">
+function test(){
+	alert("test");
+}
+</script>
+```

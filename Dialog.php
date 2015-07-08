@@ -11,6 +11,7 @@ class Dialog extends Widget
 {
 	public $width = '600';
 	public $height = '300';
+	public $mask	= 'true';
 	public $rel		= null;
 	public $title	= null;
 	public $text	= null;
@@ -25,6 +26,7 @@ class Dialog extends Widget
 			'title' => $this->title,
 			'width' => $this->width,
 			'height'=> $this->height,
+			'mask'	=> $this->mask,
 		];
 	}
 	public function run(){
