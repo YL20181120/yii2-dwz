@@ -87,3 +87,17 @@ function test(){
 }
 </script>
 ```
+4.Dialog 对话框
+
+```php
+<?php
+user yii\dwz\Dialog;
+
+echo Dialog::widget([
+		'rel' 	=> 'only_rel',
+		'title' => 'Show title',
+		'width' => '800',	//default 600
+		'height'=> '600',	//default 300
+		'mask'	=> false, //default true
+	]);
+```
