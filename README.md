@@ -99,5 +99,7 @@ echo Dialog::widget([
 		'width' => '800',	//default 600
 		'height'=> '600',	//default 300
 		'mask'	=> false, //default true
+		'url'	=> ['site/login'],
+		'text'	=> 'show_Dialog'
 	]);
 ```
