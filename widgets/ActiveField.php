@@ -18,4 +18,9 @@ class ActiveField extends \yii\widgets\ActiveField
         $this->parts['{input}'] = Html::activeTextInput($this->model, $this->attribute, $options);
         return $this;
 	}
+
+	public function dropDownList($items, $options = []){
+		$options['class'] = 'combox';
+		return parent::dropDownList($items,$options);
+	}
 }
