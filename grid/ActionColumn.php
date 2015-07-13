@@ -25,16 +25,12 @@ class ActionColumn extends \yii\grid\ActionColumn
     {
         if (!isset($this->buttons['view'])) {
             $this->buttons['view'] = function ($url, $model, $key) {
-                $options = array_merge([
-                    'title' => Yii::t('yii', 'View'),
-                    'aria-label' => Yii::t('yii', 'View'),
-                    'data-pjax' => '0',
-                ], $this->buttonOptions);
                 return Dialog::widget([
                     'rel'   => 'only_rel',
-                    'title' => 'Show title',
+                    'title' => Yii::t('yii', 'View'),
                     'url'   => $url,
-                    'text'  => 'show_Dialog'
+                    'text'  => Yii::t('yii', 'View'),
+                    'options' => $this->buttonOptions,
                 ]);
             };
         }

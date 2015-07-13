@@ -16,7 +16,8 @@ class ActiveField extends \yii\widgets\ActiveField
         $this->options['tag'] = 'dl';
     }
 	public function textInput($options = []) {
-		$options = array_merge($this->inputOptions, $options);
+        $this->getInputClass();
+        $options = array_merge($this->inputOptions, $options);
         $this->adjustLabelFor($options);
         $this->parts['{input}'] = Html::activeTextInput($this->model, $this->attribute, $options);
         return $this;
@@ -64,22 +65,25 @@ class ActiveField extends \yii\widgets\ActiveField
     {
         return Html::endTag(isset($this->options['tag']) ? $this->options['tag'] : 'div');
     }
+    protected function getInputClass(){
+        $inputID = Html::getInputId($this->model, $this->attribute);
+        $attribute = Html::getAttributeName($this->attribute);
+        $options = $this->options;
+        $class = isset($options['class']) ? [$options['class']] : [];
+        $class[] = "field-$inputID";
+        if ($this->model->isAttributeRequired($attribute)) {
+            $class[] = $this->form->requiredCssClass;
+        }
+        if ($this->model->hasErrors($attribute)) {
+            $class[] = $this->form->errorCssClass;
+        }
+        $this->inputOptions['class'] .= implode(' ', $class);
+    }
     public function render($content = null)
     {
         if ($content === null) {
             if (!isset($this->parts['{input}'])) {
-                $inputID = Html::getInputId($this->model, $this->attribute);
-                $attribute = Html::getAttributeName($this->attribute);
-                $options = $this->options;
-                $class = isset($options['class']) ? [$options['class']] : [];
-                $class[] = "field-$inputID";
-                if ($this->model->isAttributeRequired($attribute)) {
-                    $class[] = $this->form->requiredCssClass;
-                }
-                if ($this->model->hasErrors($attribute)) {
-                    $class[] = $this->form->errorCssClass;
-                }
-                $this->inputOptions['class'] .= implode(' ', $class);
+                $this->getInputClass();
                 $this->parts['{input}'] = Html::activeTextInput($this->model, $this->attribute, $this->inputOptions);
             }
             if (!isset($this->parts['{label}'])) {

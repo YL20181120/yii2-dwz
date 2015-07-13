@@ -12,7 +12,7 @@ class Dialog extends Widget
 {
 	public $width = '600';
 	public $height = '300';
-	public $mask	= 'true';
+	public $mask	= 'false';
 	public $rel		= null;
 	public $title	= null;
 	public $text	= null;

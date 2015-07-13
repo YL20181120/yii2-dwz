@@ -12,13 +12,13 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
 	public $fieldClass = 'yii\dwz\widgets\ActiveField';
 
-	public $options = ['class' => 'pageForm required-validate','onsubmit'=>'return validateCallback(this)','novalidate'=>'novalidate'];
+	public $options = ['class' => 'pageForm required-validate','onsubmit'=>'return validateCallback(this,navTabAjaxDone)','novalidate'=>'novalidate','enctype' => 'multipart/form-data'];
 
 	public $formDivOptions = ['class' => 'pageFormContent nowrap','layoutH' => '100'];
 
     public $errorCssClass = 'error';
 
-
+    public $navTabName = "";
     /**
      * Initializes the widget.
      * This renders the form open tag.
@@ -29,6 +29,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
             $this->options['id'] = $this->getId();
         }
         echo Html::beginForm($this->action, $this->method, $this->options);
+        echo Html::hiddenInput('navTabId',\yii\dwz\TreeVisitor::generateId($this->navTabName));
         echo Html::beginTag('div',$this->formDivOptions);
     }
 

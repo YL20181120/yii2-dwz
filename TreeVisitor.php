@@ -14,7 +14,7 @@ class TreeVisitor implements Visitor
 	public function visit(\yii\dwz\tree\Node\NodeInterface $node) {
 		if ($node->isLeaf()) {
 			$value = $node->getValue();
-            return [Html::tag('li',Html::a($value['label'],$value['url'],['target'=>'navTab','rel'=>$this->generateId($value['label'])]))];
+            return [Html::tag('li',Html::a($value['label'],$value['url'],['target'=>'navTab','rel'=>static::generateId($value['label'])]))];
         }
 
         $yield = [];
@@ -33,7 +33,7 @@ class TreeVisitor implements Visitor
         return $yield;
 	}
 
-	protected function generateId($label){
+	public static function generateId($label){
 		return '_'.crc32($label);
 	}
 }

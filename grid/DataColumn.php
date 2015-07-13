@@ -101,7 +101,7 @@ class DataColumn extends \yii\grid\DataColumn
 
         if ($this->filter !== false && $model instanceof Model && $this->attribute !== null && $model->isAttributeActive($this->attribute)) {
             if ($model->hasErrors($this->attribute)) {
-                Html::addCssClass($this->filterOptions, 'has-error');
+                Html::addCssClass($this->filterOptions, 'error');
                 $error = ' ' . Html::error($model, $this->attribute, $this->grid->filterErrorOptions);
             } else {
                 $error = '';

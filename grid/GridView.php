@@ -12,6 +12,7 @@ use yii\dwz\Pagination;
 use yii\dwz\data\Sort;
 class GridView extends Grid
 {
+    public $target = 'id';
 	public $searchForm = [];
     public $layoutH = 100;
 	public $sortColumns = false;
@@ -92,4 +93,21 @@ class GridView extends Grid
         $pager['count']= $this->dataProvider->getTotalCount();
         return $class::widget($pager);
 	}
+
+    public function renderTableRow($model, $key, $index)
+    {
+        $cells = [];
+        /* @var $column Column */
+        foreach ($this->columns as $column) {
+            $cells[] = $column->renderDataCell($model, $key, $index);
+        }
+        if ($this->rowOptions instanceof Closure) {
+            $options = call_user_func($this->rowOptions, $model, $key, $index, $this);
+        } else {
+            $options = $this->rowOptions;
+        }
+        $options['rel'] = is_array($key) ? json_encode($key) : (string) $key;
+        $options['target'] = $this->target;
+        return Html::tag('tr', implode('', $cells), $options);
+    }    
 }
