@@ -17,13 +17,12 @@ class FileUpload extends InputWidget
 	public $fileTypeExts  = '*.*';
 	public $auto = 'true';
 	public $multi = 'false';
-	public $onUploadSuccess = 'test';
-	public $onQueueComplete = 'uploadifyQueueComplete';
 	public function run() {
 		$view = $this->getView();
 		FileUploadAsset::register($view);
 		$this->createUploaderOptions();
-		echo Html::hiddenInput(Html::getInputName($this->model,$this->attribute));
+		$this->options['class'] = 'required';
+		echo Html::hiddenInput(Html::getInputName($this->model,$this->attribute),'',['id' => 'dwz-file-uploader']);
 		echo Html::activeInput('file',$this->model,$this->attribute,$this->options);
 	}
 
@@ -37,9 +36,7 @@ class FileUpload extends InputWidget
 		$options['fileTypeDesc'] = $this->fileTypeDesc;
 		$options['auto']		 = $this->auto;
 		$options['multi']		 = $this->multi;
-		$options['onUploadSuccess'] = $this->onUploadSuccess;
-		//$options['onQueueComplete'] = $this->onQueueComplete;
 		$options['formData']     	= $this->formData;
-		$this->options['uploaderOption'] = json_encode($options);
+		$this->options['uploaderOption'] = json_encode($options,JSON_UNESCAPED_UNICODE);
 	}
 }

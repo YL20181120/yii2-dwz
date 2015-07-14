@@ -15,6 +15,7 @@ class FileUploadAsset extends AssetBundle
 		'css/uploadify.css',
 	];
 	public $js = [
+		'scripts/my.js',
 		'scripts/jquery.uploadify.min.js',
 	];
 }

@@ -116,9 +116,9 @@ function initUI(_box){
 				fileObjName: $this.attr("name") || "file",
 				auto: true,
 				multi: true,
-				onUploadError: uploadifyError
+				onUploadError: uploadifyError,
+				onUploadSuccess:uploadifySuccessMy
 			};
-			
 			var uploaderOption = DWZ.jsonEval($this.attr("uploaderOption"));
 			$.extend(options, uploaderOption);
 
