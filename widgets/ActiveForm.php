@@ -19,6 +19,8 @@ class ActiveForm extends \yii\widgets\ActiveForm
     public $errorCssClass = 'error';
 
     public $navTabName = "";
+
+    public $onsubmit;
     /**
      * Initializes the widget.
      * This renders the form open tag.
@@ -27,6 +29,9 @@ class ActiveForm extends \yii\widgets\ActiveForm
     {
         if (!isset($this->options['id'])) {
             $this->options['id'] = $this->getId();
+        }
+        if(isset($this->onsubmit)){
+            $this->options['onsubmit'] = $this->onsubmit;
         }
         echo Html::beginForm($this->action, $this->method, $this->options);
         echo Html::hiddenInput('navTabId',\yii\dwz\TreeVisitor::generateId($this->navTabName));

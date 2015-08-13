@@ -9,11 +9,15 @@ use yii\web\AssetBundle;
 */
 class DwzLoginAsset extends AssetBundle
 {
-	public $sourcePath = '@yii/dwz/assets';
+	public $sourcePath = '@yii/dwz/assets/login';
 
 	public $css = [
-		'css/themes/css/login.css',
+		'css/normalize.css',
+		'css/default.css',
+		'css/styles.css',
 	];
 
-	public $js = [];
+	public $js = [
+		'js/jquery-2.1.1.min.js'
+	];
 }

@@ -30,7 +30,6 @@ class ActiveField extends \yii\widgets\ActiveField
 
     public function label($label = null, $options = [])
     {
-    	var_dump($label);
         if ($label === false) {
             $this->parts['{label}'] = '';
             return $this;
@@ -114,6 +113,11 @@ class ActiveField extends \yii\widgets\ActiveField
     }
 
     public function fileUpload($options = []) {
+        return $this;
+    }
+
+    public function value($value) {
+        $this->inputOptions['value'] = $value;
         return $this;
     }
 }
