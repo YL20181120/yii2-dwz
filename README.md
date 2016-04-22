@@ -1,5 +1,8 @@
 #YII2-DWZ
 ###dwz ui for yii2
-* [dwz website](http://jui.org/)
-* [yii website](http://yiiframework.com)
-* [yiichina website](http://www.yiichina.com/)
+
+Thanks for under dude
+ 
+* [http://jui.org/](http://jui.org/)
+* [http://yiiframework.com](http://yiiframework.com)
+* [http://www.yiichina.com/](http://www.yiichina.com/)
