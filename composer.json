@@ -13,7 +13,7 @@
   "require": {
     "php": ">=5.4.0"
   },
-
+  "minimum-stability":"dev",
   "autoload": {
     "psr-4": {
       "jasmine2\\dwz\\": "src/"
