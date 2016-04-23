@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
  */
 class DwzAsset extends AssetBundle
 {
-	public $sourcePath = '@jasmine/dwz/assets';
+	public $sourcePath = '@jasmine2/dwz/assets';
 
 	public $css        = [
 		'themes/default/style.css',

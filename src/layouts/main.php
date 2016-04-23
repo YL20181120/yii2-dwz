@@ -6,7 +6,7 @@
  * Time: 09:59
  */
 use yii\helpers\Html;
-use jasmine\dwz\DwzAsset;
+use jasmine2\dwz\DwzAsset;
 DwzAsset::register($this);
 $dwzBaseUrl = $this->getAssetManager()->getBundle(DwzAsset::className())->baseUrl;
 ?>
