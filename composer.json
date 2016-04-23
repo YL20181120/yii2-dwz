@@ -1,5 +1,5 @@
 {
-  "name": "jasmine/yii2-dwz",
+  "name": "jasmine2/yii2-dwz",
   "description": "Yii2 and dwz UI framework tools",
   "license": "MIT",
   "keywords": ["yii2","dwz"],
@@ -16,7 +16,7 @@
 
   "autoload": {
     "psr-4": {
-      "jasmine\\dwz\\": "src/"
+      "jasmine2\\dwz\\": "src/"
     }
   }
 }

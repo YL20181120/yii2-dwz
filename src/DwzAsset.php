@@ -1,5 +1,5 @@
 <?php
-namespace jasmine\dwz;
+namespace jasmine2\dwz;
 use yii\web\AssetBundle;
 
 /**
