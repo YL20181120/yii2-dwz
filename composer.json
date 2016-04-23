@@ -1,0 +1,22 @@
+{
+  "name": "jasmine/yii2-dwz",
+  "description": "Yii2 and dwz UI framework tools",
+  "license": "MIT",
+  "keywords": ["yii2","dwz"],
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Jasmine2",
+      "email": "youjingqiang@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "jasmine\\dwz\\": "src/"
+    }
+  }
+}
