@@ -3,7 +3,7 @@ namespace jasmine2\dwz;
 use yii\web\AssetBundle;
 
 /**
- * Created by BIGMAO.
+ * Created by Jasmine2.
  * FileName: LayoutAsset.php
  * Date: 2016-4-22
  * Time: 08:58
