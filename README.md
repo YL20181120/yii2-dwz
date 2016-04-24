@@ -20,7 +20,7 @@ to the require-dev section of your `composer.json` file.
 #Useage
 ---
 
-1. First,add alias to you config file,like this:
+1.First,add alias to you config file,like this:
 
 ```php
 'aliases'   => [
@@ -29,7 +29,7 @@ to the require-dev section of your `composer.json` file.
     ],
 ```
 
-2. Second,you should make sure all your controller extends jasmine2\dwz\Controller ,except SiteController;
+2.Second,you should make sure all your controller extends jasmine2\dwz\Controller ,except SiteController;
 In the SiteController ,you should add layout file;
 
 ```php
