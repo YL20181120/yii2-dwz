@@ -1,12 +1,13 @@
 <?php
 /**
- * Created by Jasmine2.
+ * @author Jasmine2.
  * FileName: main.php
  * Date: 2016-4-22
  * Time: 09:59
  */
 use yii\helpers\Html;
 use jasmine2\dwz\DwzAsset;
+use jasmine2\dwz\Alert;
 DwzAsset::register($this);
 $dwzBaseUrl = $this->getAssetManager()->getBundle(DwzAsset::className())->baseUrl;
 ?>
@@ -81,6 +82,7 @@ $dwzBaseUrl = $this->getAssetManager()->getBundle(DwzAsset::className())->baseUr
 					<ul class="tree treeFolder">
 						<li><a href="<?= \yii\helpers\Url::to(['site/contact'])?>" target="navTab">Contact us</a></li>
 						<li><a href="<?= \yii\helpers\Url::to(['site/about'])?>" target="navTab">About us</a></li>
+						<li><a href="<?= \yii\helpers\Url::to(['index/index'])?>" target="navTab">Index/index</a></li>
 					</ul>
 				</div>
 			</div>

@@ -1,13 +1,20 @@
 <?php
 /**
- * Created by Jasmine2.
+ * @author Jasmine2.
  * FileName: Alert.php
  * Date: 2016-4-24
  * Time: 08:37
  */
 
 namespace jasmine2\dwz;
-
+/**
+ * Alert widget renders a message from session flash. Just last flash messages are displayed
+ * You can set message as following:
+ *
+ * - \Yii::$app->getSession()->setFlash('error', 'This is the message');
+ * - \Yii::$app->getSession()->setFlash('success', 'This is the message');
+ * - \Yii::$app->getSession()->setFlash('info', 'This is the message');
+ */
 
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
@@ -18,14 +25,15 @@ class Alert extends Widget
 
 	public $type = 'info';
 
-	public $content;
+	private $javascript;
 
-	const TYPE_RANGE = ['info','warning','success','error','javascript'];
+	const TYPE_RANGE = ['info','warning','success','error'];
+
 	public function init()
 	{
 		parent::init();
-		if(empty($this->content)){
-			throw new InvalidConfigException("`content` can't be null");
+		if(empty($this->message)){
+			throw new InvalidConfigException("`message` can't be null");
 		}
 		if(!in_array($this->type,self::TYPE_RANGE)){
 			throw new InvalidConfigException("Param `type` must in range '".implode(' ', self::TYPE_RANGE)."'",1);
@@ -34,28 +42,24 @@ class Alert extends Widget
 
 	public function run()
 	{
-			return $this->renderAlert();
+		return $this->renderAlert();
 	}
 
 	protected function renderAlert(){
 		switch ($this->type) {
 			case 'warning':
-				$this->options['onclick'] = "alertMsg.warn('".$this->message."')";
+				$this->javascript = "alertMsg.warn('".$this->message."');";
 				break;
 			case 'success':
-				$this->options['onclick'] = "alertMsg.correct('".$this->message."')";
+				$this->javascript = "alertMsg.correct('".$this->message."');";
 				break;
 			case 'error':
-				$this->options['onclick'] = "alertMsg.error('".$this->message."')";
-				break;
-			//确认窗口
-			case 'javascript':
-				$this->options['onclick'] = $this->message;
+				$this->javascript = "alertMsg.error('".$this->message."');";
 				break;
 			case 'info':
-				$this->options['onclick'] = "alertMsg.info('".$this->message."')";
+				$this->javascript = "alertMsg.info('".$this->message."');";
 				break;
 		}
-		return Html::a($this->content,'javascript:;',$this->options);
+		return Html::tag('script',$this->javascript);
 	}
 }

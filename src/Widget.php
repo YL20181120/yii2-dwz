@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by Jasmine2.
+ * @author Jasmine2.
  * FileName: Widget.php
  * Date: 2016-4-24
  * Time: 08:38
