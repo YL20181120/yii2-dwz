@@ -42,6 +42,7 @@ class Dialog extends Widget
 	 */
 	public function init()
 	{
+		parent::init();
 		if($this->title == null || $this->url == null)
 			throw new InvalidConfigException("param `title` or `url` can not be null");
 
