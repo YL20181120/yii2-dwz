@@ -29,6 +29,7 @@ class Controller extends \yii\web\Controller
 					'type' => $type,
 					'message' => $message,
 				]);
+				$session->removeFlash($type);
 			}
 		}
 
