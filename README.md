@@ -136,6 +136,25 @@ public $layout = '@jasmine2/dwz/layouts/main';
 		?>
 ```
 
+5. Tabs
+
+```php
+<?php
+			echo Tabs::widget([
+				'items' => [
+					[
+						'title' => '标题1',
+						'content' => '<pre>Hello</pre>'
+					],
+					[
+						'title' => '标题2',
+						'url'   => ['site/contact']
+					]
+				]
+			]);
+		?>
+```
+
 * [http://jui.org/](http://jui.org/)
 * [http://yiiframework.com](http://yiiframework.com)
 * [http://www.yiichina.com/](http://www.yiichina.com/)
