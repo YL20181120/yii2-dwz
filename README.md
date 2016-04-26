@@ -30,7 +30,7 @@ to the require-dev section of your `composer.json` file.
 ```php
 public $layout = '@jasmine2/dwz/layouts/main';
 ```
-######1.Alert
+######1. Alert
 
 要显示一个Alert，只要像下面这样设置一个Flash即可，支持`error`,`warning`,`success`和`info`4中类型的提示窗口
 
@@ -42,7 +42,7 @@ public $layout = '@jasmine2/dwz/layouts/main';
  Yii::$app->getSession()->setFlash('info', 'This is the message');
 ```
 
-######2.Button
+######2. Button
 
 ```php
 <?= Button::widget([
@@ -70,7 +70,7 @@ public $layout = '@jasmine2/dwz/layouts/main';
 ])?>
 ```
 
-######3.Dialog
+######3. Dialog
 
 ```php
 /**
@@ -94,7 +94,7 @@ public $layout = '@jasmine2/dwz/layouts/main';
 ?>
 ```
 
-######4.Panel
+######4. Panel
 
 ```php
 <?php
@@ -130,7 +130,7 @@ public $layout = '@jasmine2/dwz/layouts/main';
 		?>
 ```
 
-######5.Tabs
+######5. Tabs
 
 ```php
 <?php
@@ -147,6 +147,39 @@ public $layout = '@jasmine2/dwz/layouts/main';
 				]
 			]);
 		?>
+```
+
+######6. Accordion
+- add the `menu` key to your `params.php` ,like this:
+
+```php
+'menus'      => [
+		[
+			'label'=>'菜单测试',
+			'menus' => [
+				[
+					'label' => '一级菜单',
+					'menus' => [
+						[
+							'label' => '二级菜单',
+							'menus' => [
+								[
+									'label' => '三级菜单',
+									'url'   => ['site/contact'],
+									'visible' => false // don't show this menu
+								]
+							]
+						],
+						[
+							'label' => 'About us',
+							'url'   => ['site/about'],
+						]
+					]
+				],
+			],
+		],
+	]
+	... other params
 ```
 
 * [http://jui.org/](http://jui.org/)

@@ -74,17 +74,7 @@ $dwzBaseUrl = $this->getAssetManager()->getBundle(DwzAsset::className())->baseUr
 			<div class="toggleCollapse"><h2>主菜单</h2><div>收缩</div></div>
 
 			<div class="accordion" fillSpace="sidebar">
-				<div class="accordionHeader">
-					<h2><span>Folder</span>界面组件</h2>
-				</div>
-				
-				<div class="accordionContent">
-					<ul class="tree treeFolder">
-						<li><a href="<?= \yii\helpers\Url::to(['site/contact'])?>" target="navTab">Contact us</a></li>
-						<li><a href="<?= \yii\helpers\Url::to(['site/about'])?>" target="navTab">About us</a></li>
-						<li><a href="<?= \yii\helpers\Url::to(['index/index'])?>" target="navTab">Index/index</a></li>
-					</ul>
-				</div>
+				<?= \jasmine2\dwz\Accordion::widget(['items'=>isset(\Yii::$app->params['menus'])?\Yii::$app->params['menus']:null,'options'=>['class'=>'tree treeFolder expand']])?>
 			</div>
 		</div>
 	</div>
@@ -136,7 +126,7 @@ $dwzBaseUrl = $this->getAssetManager()->getBundle(DwzAsset::className())->baseUr
 		// todo 不知道什么原因会导致我的主页标签看不见，查看不知道那个位置将navTab-tab 的left设置为了一个负数，您要是知道敬请告知，感激不尽！
 		setTimeout(function () {
 			$(".navTab-tab").css({'left':'0'});
-		},300);
+		},600);
 	});
 </script>
 </body>
