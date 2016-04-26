@@ -21,7 +21,7 @@ class MenuVisitor implements Visitor
 			if(!isset($value['url'])){
 				throw new InvalidConfigException('Param `url` must be set :'.$value['label']);
 			}
-			return [Html::tag('li',Html::a($value['label'],isset($value['url'])?$value['url']:'',['target'=>'navTab','rel'=>static::generateId($value['label'])]))];
+			return [Html::tag('li',Html::a($value['label'],isset($value['url'])?$value['url']:'',['target'=>isset($value['target'])?$value['target']:'navTab','rel'=>static::generateId($value['label'])]))];
 		}
 		$yield = [];
 
