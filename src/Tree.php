@@ -45,7 +45,7 @@ class Tree extends Widget
 	public function getHtmlCode(){
 		$visitor = new MenuVisitor();
 		$res = $this->root->accept($visitor);
-		Html::addCssClass($this->options,['tree','treeFolder']);
+		//Html::addCssClass($this->options,['tree','treeFolder']);
 		$res[0] = Html::beginTag('ul',$this->options);
 		$res = implode('', $res);
 		return $res;

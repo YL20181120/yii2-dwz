@@ -181,7 +181,13 @@ public $layout = '@jasmine2/dwz/layouts/main';
 	]
 	... other params
 ```
-
+- Accordion type
+    - tree
+    - tree [treeFolder]
+    - tree [treeFolder] expend
+    - tree [treeFolder] collapse
+    
+`<?= \jasmine2\dwz\Accordion::widget(['items'=>isset(\Yii::$app->params['menus'])?\Yii::$app->params['menus']:null,'options'=>['class'=>'tree treeFolder']])?>`    
 * [http://jui.org/](http://jui.org/)
 * [http://yiiframework.com](http://yiiframework.com)
 * [http://www.yiichina.com/](http://www.yiichina.com/)

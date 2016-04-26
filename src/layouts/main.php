@@ -74,7 +74,7 @@ $dwzBaseUrl = $this->getAssetManager()->getBundle(DwzAsset::className())->baseUr
 			<div class="toggleCollapse"><h2>主菜单</h2><div>收缩</div></div>
 
 			<div class="accordion" fillSpace="sidebar">
-				<?= \jasmine2\dwz\Accordion::widget(['items'=>isset(\Yii::$app->params['menus'])?\Yii::$app->params['menus']:null,'options'=>['class'=>'tree treeFolder expand']])?>
+				<?= \jasmine2\dwz\Accordion::widget(['items'=>isset(\Yii::$app->params['menus'])?\Yii::$app->params['menus']:null,'options'=>['class'=>'tree collapse']])?>
 			</div>
 		</div>
 	</div>
