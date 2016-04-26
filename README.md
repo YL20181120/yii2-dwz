@@ -30,7 +30,7 @@ to the require-dev section of your `composer.json` file.
 ```php
 public $layout = '@jasmine2/dwz/layouts/main';
 ```
-######Alert
+######1.Alert
 
 要显示一个Alert，只要像下面这样设置一个Flash即可，支持`error`,`warning`,`success`和`info`4中类型的提示窗口
 
@@ -42,7 +42,7 @@ public $layout = '@jasmine2/dwz/layouts/main';
  Yii::$app->getSession()->setFlash('info', 'This is the message');
 ```
 
-######Button
+######2.Button
 
 ```php
 <?= Button::widget([
@@ -70,7 +70,7 @@ public $layout = '@jasmine2/dwz/layouts/main';
 ])?>
 ```
 
-######Dialog
+######3.Dialog
 
 ```php
 /**
@@ -94,7 +94,7 @@ public $layout = '@jasmine2/dwz/layouts/main';
 ?>
 ```
 
-######Panel
+######4.Panel
 
 ```php
 <?php
@@ -130,7 +130,7 @@ public $layout = '@jasmine2/dwz/layouts/main';
 		?>
 ```
 
-######Tabs
+######5.Tabs
 
 ```php
 <?php
