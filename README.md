@@ -17,7 +17,7 @@ jasmine2/yii2-dwz:2.0.x-dev
 ```
 
 to the require-dev section of your `composer.json` file.
-#Useage
+#Usage
 ---
 ######1.First,add alias to you config file,like this:
 ```php

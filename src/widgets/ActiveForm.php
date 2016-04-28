@@ -19,7 +19,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
 		Html::addCssClass($this->options, 'pageForm required-validate');
 		$this->options['onsubmit'] = 'return validateCallback(this)';
 		parent::init();
-		echo '<div class="pageFormContent nowrap" layoutH="55">';
+		echo '<div class="pageFormContent" layoutH="55">';
 	}
 
 	public static function end()

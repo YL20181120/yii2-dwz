@@ -20,4 +20,22 @@ class Html extends \yii\helpers\Html
 			</ul>
 		</div>';
 	}
+
+	public static function activeInput($type, $model, $attribute, $options = [])
+	{
+		$name = isset($options['name']) ? $options['name'] : static::getInputName($model, $attribute);
+		$value = isset($options['value']) ? $options['value'] : static::getAttributeValue($model, $attribute);
+		if (!array_key_exists('id', $options)) {
+			$options['id'] = static::getInputId($model, $attribute);
+		}
+		return static::input($type, $name, $value, $options);
+	}
+
+	public static function activeLabel($model, $attribute, $options = [])
+	{
+		$attribute = static::getAttributeName($attribute);
+		$label = ArrayHelper::remove($options, 'label', static::encode($model->getAttributeLabel($attribute)));
+		$tag = ArrayHelper::remove($options, 'tag', 'dt');
+		return static::tag($tag, $label, $options);
+	}
 }
