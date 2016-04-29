@@ -1,5 +1,13 @@
-#YII2-DWZ
+YII2-DWZ
+================
+
 ###dwz ui for yii2
+
+[![Latest Stable Version](https://poser.pugx.org/jasmine2/yii2-dwz/v/stable)](https://packagist.org/packages/jasmine2/yii2-dwz) 
+[![Total Downloads](https://poser.pugx.org/jasmine2/yii2-dwz/downloads)](https://packagist.org/packages/jasmine2/yii2-dwz) 
+[![Latest Unstable Version](https://poser.pugx.org/jasmine2/yii2-dwz/v/unstable)](https://packagist.org/packages/jasmine2/yii2-dwz) 
+[![License](https://poser.pugx.org/jasmine2/yii2-dwz/license)](https://packagist.org/packages/jasmine2/yii2-dwz)
+
 #Install
 ------------
 

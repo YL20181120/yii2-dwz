@@ -67,8 +67,8 @@ class GridView extends \yii\grid\GridView
 			echo '<input type="hidden" name="pageNum" value="1" />';
 			echo '<input type="hidden" name="'.Yii::$app->request->csrfParam.'" value="'.Yii::$app->request->getCsrfToken().'" />';
 			echo '<input type="hidden" name="numPerPage" value="'.$this->dataProvider->getPagination()->getPageSize().'"/>';
-			//echo '<input type="hidden" name="orderField" value="${param.orderField}" />';
-			//echo '<input type="hidden" name="orderDirection" value="${param.orderDirection}" />';
+			echo '<input type="hidden" name="orderField" value="${param.orderField}" />';
+			echo '<input type="hidden" name="orderDirection" value="${param.orderDirection}" />';
 			Html::endForm();
 		} else {
 			return null;
