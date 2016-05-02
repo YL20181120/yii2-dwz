@@ -37,6 +37,7 @@ use <?= ltrim($generator->searchModelClass, '\\') . (isset($searchModelAlias) ? 
 use yii\data\ActiveDataProvider;
 <?php endif; ?>
 use <?= ltrim($generator->baseControllerClass, '\\') ?>;
+use yii\web\Response;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -142,9 +143,12 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     public function actionDelete(<?= $actionParams ?>)
     {
-        $this->findModel(<?= $actionParams ?>)->delete();
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if($this->findModel(<?= $actionParams ?>)->delete()){
+            return self::SUCCESS;
+        }
 
-        return $this->redirect(['index']);
+        return self::ERROR;
     }
 
     /**

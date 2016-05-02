@@ -13,6 +13,18 @@ use jasmine2\dwz\Alert;
 
 class Controller extends \yii\web\Controller
 {
+	const TIMEOUT = [
+		"statusCode"=>"301",
+		"message"=>"会话超时",
+	];
+	const SUCCESS = [
+		"statusCode"=>"200",
+		"message"=>"操作成功",
+	];
+	const ERROR = [
+		"statusCode"=>"300",
+		"message"=>"操作失败"
+	];
 	public function render($view, $params = [])
 	{
 		return $this->renderAjax($view, $params);
