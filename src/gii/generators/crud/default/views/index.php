@@ -58,7 +58,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 }
 ?>
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'jasmine2\dwz\grid\ActionColumn'],
         ],
     ]); ?>
 <?php else: ?>

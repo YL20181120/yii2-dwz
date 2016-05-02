@@ -29,6 +29,7 @@ class GridView extends BaseListView
 	public $columns = [];
 	public $showTools = true;
 	public $tools   = [
+		'view',
 		'create',
 		'update',
 		'delete',
@@ -173,8 +174,17 @@ class GridView extends BaseListView
 								[
 									'class' => 'delete',
 									'target' => 'ajaxTodo',
-									'title' => '确定要删除吗？',
-									'_csrf' => Yii::$app->request->getCsrfToken()]));
+									'title' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+									'_csrf' => Yii::$app->request->getCsrfToken()
+								]));
+							break;
+						case 'view':
+							echo Html::tag('li',Html::a('<span>查看</span>',
+								[Yii::$app->controller->uniqueId . '/view&id={row_id}'],
+								[
+									'class' => 'icon',
+									'target' => 'navTab',
+								]));
 							break;
 						default:
 							break;
