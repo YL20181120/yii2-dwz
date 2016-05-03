@@ -6,6 +6,7 @@ namespace jasmine2\dwz\grid;
  * Date: 2016-4-28
  * Time: 11:01
  */
+use jasmine2\dwz\Dialog;
 use jasmine2\dwz\helpers\Html;
 use jasmine2\dwz\helpers\ArrayHelper;
 use Yii;
@@ -41,7 +42,7 @@ class GridView extends BaseListView
 	public $formatter;
 	public $emptyCell = '&nbsp;';
 
-	public $layout = "{pagerForm}\n{search}\n{tools}\n{items}\n{pager}";
+	public $layout = "{pagerForm}\n{tools}\n{items}\n{pager}";
 
 	public function init()
 	{
@@ -85,7 +86,6 @@ class GridView extends BaseListView
 
 	public function renderItems()
 	{
-		$search = $this->renderSearch();
 		$tableHeader = $this->renderTableHeader();
 		$tableBody = $this->renderTableBody();
 		$content = array_filter([
@@ -157,19 +157,20 @@ class GridView extends BaseListView
 	{
 		if($this->showTools) {
 			$this->layoutH += 27;
-			echo Html::beginTag('div',['class' => 'panelBar']);
-			echo Html::beginTag('ul',['class' => 'toolBar']);
+			$tools = [];
+			$tools[] = Html::beginTag('div',['class' => 'panelBar']);
+			$tools[] = Html::beginTag('ul',['class' => 'toolBar']);
 			foreach($this->tools as $tool){
 				if(is_string($tool)){
 					switch($tool){
 						case 'create':
-							echo Html::tag('li',Html::a('<span>添加</span>',[Yii::$app->controller->uniqueId . '/create'],['class' => 'add','target' => 'navTab']));
+							$tools[] = Html::tag('li',Html::a('<span>添加</span>',[Yii::$app->controller->uniqueId . '/create'],['class' => 'add','target' => 'navTab']));
 							break;
 						case 'update':
-							echo Html::tag('li',Html::a('<span>编辑</span>',[Yii::$app->controller->uniqueId . '/update&id={row_id}'],['class' => 'edit','target' => 'navTab']));
+							$tools[] = Html::tag('li',Html::a('<span>编辑</span>',[Yii::$app->controller->uniqueId . '/update&id={row_id}'],['class' => 'edit','target' => 'navTab']));
 							break;
 						case 'delete':
-							echo Html::tag('li',Html::a('<span>删除</span>',
+							$tools[] = Html::tag('li',Html::a('<span>删除</span>',
 								[Yii::$app->controller->uniqueId . '/delete&id={row_id}'],
 								[
 									'class' => 'delete',
@@ -179,28 +180,30 @@ class GridView extends BaseListView
 								]));
 							break;
 						case 'view':
-							echo Html::tag('li',Html::a('<span>查看</span>',
-								[Yii::$app->controller->uniqueId . '/view&id={row_id}'],
-								[
+							$tools[] = Html::tag('li', Dialog::widget([
+								'title' => '查看',
+								'mask'  => true,
+								'text'  => '<span>查看</span>',
+								'options' => [
 									'class' => 'icon',
-									'target' => 'navTab',
-								]));
+								],
+								'url'   => [Yii::$app->controller->uniqueId . '/view&id={row_id}']
+							]));
 							break;
 						default:
 							break;
 					}
 				}
 			}
-			echo Html::endTag('ul');
-			echo Html::endTag('div');
+			$tools[] = Html::endTag('ul');
+			$tools[] = Html::endTag('div');
+			return implode('',$tools);
 		}
 	}
 
 	public function renderSection($name)
 	{
 		switch ($name) {
-			case '{search}':
-				return $this->renderSearch();
 			case '{tools}':
 				return $this->renderTools();
 			case '{pagerForm}':
@@ -216,10 +219,6 @@ class GridView extends BaseListView
 		echo Html::input('hidden','pageNum',1);
 		echo Html::input('hidden','numPerPage',$pagination->getPageSize());
 		ActiveForm::end();
-	}
-	public function renderSearch()
-	{
-		return '';
 	}
 
 
