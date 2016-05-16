@@ -21,6 +21,8 @@ class DwzAsset extends AssetBundle
 		'js/jquery.cookie.js',
 		'js/jquery.validate.js',
 		'js/jquery.bgiframe.js',
+		'xheditor/xheditor-1.2.2.min.js',
+		'xheditor/xheditor_lang/zh-cn.js',
 		'js/dwz.min.js',
 		'js/dwz.regional.zh.js'
 	];

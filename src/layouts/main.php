@@ -34,7 +34,7 @@ $dwzBaseUrl = $this->getAssetManager()->getBundle(DwzAsset::className())->baseUr
 <div id="layout">
 	<div id="header">
 		<div class="headerNav">
-			<a href="#" class="logo">标志</a>
+			<a href="#" class="logo" style="background: url('images/backend-logo.png') no-repeat;">标志</a>
 			<ul class="nav">
 				<li id="switchEnvBox"><a href="javascript:">（<span>北京</span>）切换城市</a>
 					<ul>
