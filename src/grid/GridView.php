@@ -83,7 +83,9 @@ class GridView extends BaseListView
 	{
 		parent::run();
 	}
-
+	public function renderEmpty(){
+		return $this->renderTools();
+	}
 	public function renderItems()
 	{
 		$tableHeader = $this->renderTableHeader();
@@ -167,11 +169,11 @@ class GridView extends BaseListView
 							$tools[] = Html::tag('li',Html::a('<span>添加</span>',[Yii::$app->controller->uniqueId . '/create'],['class' => 'add','target' => 'navTab']));
 							break;
 						case 'update':
-							$tools[] = Html::tag('li',Html::a('<span>编辑</span>',[Yii::$app->controller->uniqueId . '/update&id={row_id}'],['class' => 'edit','target' => 'navTab']));
+							$tools[] = Html::tag('li',Html::a('<span>编辑</span>',[Yii::$app->controller->uniqueId . '/update?id={row_id}'],['class' => 'edit','target' => 'navTab']));
 							break;
 						case 'delete':
 							$tools[] = Html::tag('li',Html::a('<span>删除</span>',
-								[Yii::$app->controller->uniqueId . '/delete&id={row_id}'],
+								[Yii::$app->controller->uniqueId . '/delete?id={row_id}'],
 								[
 									'class' => 'delete',
 									'target' => 'ajaxTodo',
@@ -187,7 +189,7 @@ class GridView extends BaseListView
 								'options' => [
 									'class' => 'icon',
 								],
-								'url'   => [Yii::$app->controller->uniqueId . '/view&id={row_id}']
+								'url'   => [Yii::$app->controller->uniqueId . '/view?id={row_id}']
 							]));
 							break;
 						default:

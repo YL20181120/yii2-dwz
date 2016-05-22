@@ -23,14 +23,14 @@ class ActiveField extends \yii\widgets\ActiveField
 	];
 	public $inputOptions = ['class' => ''];
 	public $labelOptions = ['class' => ''];
+	public $errorOptions = ['class' => ''];
 	public $hintOptions = ['class' => 'info'];
-	public $template = "{label}\n{input}";
+	//public $template = "{label}\n{input}\n{error}";
 	public function textInput($options = [])
 	{
 		$options = array_merge($this->inputOptions, $options);
 		$this->adjustLabelFor($options);
 		$this->adjustValidateClass($options);
-
 		$this->parts['{input}'] = Html::activeTextInput($this->model, $this->attribute, $options);
 		return $this;
 	}
@@ -69,10 +69,15 @@ class ActiveField extends \yii\widgets\ActiveField
 	{
 		$options = $this->options;
 		$tag = ArrayHelper::remove($options, 'tag', 'div');
-
 		return Html::beginTag($tag, $options);
 	}
 
-
+	public function error($options = [])
+	{
+		$options = array_merge($this->errorOptions, $options);
+		$options['for'] = Html::getInputId($this->model, $this->attribute);
+		$this->parts['{error}'] = Html::tag('span','', $options);
+		return $this;
+	}
 
 }

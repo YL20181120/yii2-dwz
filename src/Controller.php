@@ -9,7 +9,8 @@
 namespace jasmine2\dwz;
 
 
-use jasmine2\dwz\Alert;
+
+use yii\web\Response;
 
 class Controller extends \yii\web\Controller
 {
@@ -44,7 +45,7 @@ class Controller extends \yii\web\Controller
 				$session->removeFlash($type);
 			}
 		}
-
+		\Yii::$app->response->format = Response::FORMAT_JSON;
 		return parent::beforeAction($action);
 	}
 }

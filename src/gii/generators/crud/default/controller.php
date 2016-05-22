@@ -107,9 +107,22 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     {
         $model = new <?= $modelClass ?>();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', <?= $urlParams ?>]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save()){
+                return array_merge(self::SUCCESS,[
+                    'navTabId' => Yii::$app->request->post()['navTabId'],
+                    "callbackType"=>"closeCurrent",
+                ]);
+            } else {
+                $form_name = strtolower($model->formName());
+                $errors = $model->getErrors();
+                return array_merge(self::ERROR,[
+                    'form-name'   => $form_name,
+                    'errors' => $errors,
+                ]);
+            }
         } else {
+            Yii::$app->response->format = Response::FORMAT_HTML;
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -126,10 +139,23 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     {
         $model = $this->findModel(<?= $actionParams ?>);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', <?= $urlParams ?>]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->save()){
+                return array_merge(self::SUCCESS,[
+                    'navTabId' => Yii::$app->request->post()['navTabId'],
+                    "callbackType"=>"closeCurrent",
+                ]);
+            } else {
+                $form_name = strtolower($model->formName());
+                $errors = $model->getErrors();
+                return array_merge(self::ERROR,[
+                    'form-name'   => $form_name,
+                    'errors' => $errors,
+                ]);
+            }
         } else {
-            return $this->render('update', [
+            Yii::$app->response->format = Response::FORMAT_HTML;
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
@@ -143,7 +169,6 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     public function actionDelete(<?= $actionParams ?>)
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
         if($this->findModel(<?= $actionParams ?>)->delete()){
             return self::SUCCESS;
         }
