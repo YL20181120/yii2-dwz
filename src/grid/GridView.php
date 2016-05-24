@@ -28,6 +28,7 @@ class GridView extends BaseListView
 	public $layoutH = '48';
 	public $options = ['class' => 'pageContent'];
 	public $columns = [];
+	public $search = null;
 	public $showTools = true;
 	public $tools   = [
 		'view',
@@ -42,7 +43,7 @@ class GridView extends BaseListView
 	public $formatter;
 	public $emptyCell = '&nbsp;';
 
-	public $layout = "{pagerForm}\n{tools}\n{items}\n{pager}";
+	public $layout = "{search}\n{pagerForm}\n{tools}\n{items}\n{pager}";
 
 	public function init()
 	{
@@ -81,10 +82,18 @@ class GridView extends BaseListView
 	}
 	public function run()
 	{
-		parent::run();
+		$content = preg_replace_callback("/{\\w+}/", function ($matches) {
+			$content = $this->renderSection($matches[0]);
+
+			return $content === false ? $matches[0] : $content;
+		}, $this->layout);
+
+		$options = $this->options;
+		$tag = ArrayHelper::remove($options, 'tag', 'div');
+		echo Html::tag($tag, $content, $options);
 	}
 	public function renderEmpty(){
-		return $this->renderTools();
+		return '无内容';
 	}
 	public function renderItems()
 	{
@@ -191,9 +200,17 @@ class GridView extends BaseListView
 								],
 								'url'   => [Yii::$app->controller->uniqueId . '/view?id={row_id}']
 							]));
+							/*$tools[] = Html::tag('li',Html::a(
+								'<span>查看</span>',
+								[Yii::$app->controller->uniqueId . '/view?id={row_id}'],
+								[
+									'target' => 'navTab',
+									'class' => 'icon',
+								]
+							));*/
 							break;
 						default:
-							break;
+							$tools[] = $tool;
 					}
 				}
 			}
@@ -206,6 +223,8 @@ class GridView extends BaseListView
 	public function renderSection($name)
 	{
 		switch ($name) {
+			case '{search}':
+				return $this->renderSearch();
 			case '{tools}':
 				return $this->renderTools();
 			case '{pagerForm}':
@@ -252,5 +271,13 @@ class GridView extends BaseListView
 			'format' => isset($matches[3]) ? $matches[3] : 'text',
 			'label' => isset($matches[5]) ? $matches[5] : null,
 		]);
+	}
+
+	public function renderSearch()
+	{
+		if($this->search){
+			$this->layoutH += 62;
+			return $this->search;
+		}
 	}
 }

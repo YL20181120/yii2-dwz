@@ -10,19 +10,17 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use jasmine2\dwz\widgets\SearchForm;
 
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->searchModelClass, '\\') ?> */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-search">
-
-    <?= "<?php " ?>$form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
-    ]); ?>
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="" method="post">
+        <div class="searchBar">
+            <?= "<?php"?> $form = SearchForm::begin()?>
 
 <?php
 $count = 0;
@@ -34,11 +32,13 @@ foreach ($generator->getColumnNames() as $attribute) {
     }
 }
 ?>
-    <div class="form-group">
-        <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Search') ?>, ['class' => 'btn btn-primary']) ?>
-        <?= "<?= " ?>Html::resetButton(<?= $generator->generateString('Reset') ?>, ['class' => 'btn btn-default']) ?>
-    </div>
 
-    <?= "<?php " ?>ActiveForm::end(); ?>
-
+    <?= "<?php " ?>SearchForm::end(); ?>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
 </div>

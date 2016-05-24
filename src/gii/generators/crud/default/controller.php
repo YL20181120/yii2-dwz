@@ -69,8 +69,9 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     {
 <?php if (!empty($generator->searchModelClass)): ?>
         $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->post());
 
+        Yii::$app->response->format = Response::FORMAT_HTML;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -80,6 +81,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
             'query' => <?= $modelClass ?>::find(),
         ]);
 
+        Yii::$app->response->format = Response::FORMAT_HTML;
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -93,6 +95,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     public function actionView(<?= $actionParams ?>)
     {
+        Yii::$app->response->format = Response::FORMAT_HTML;
         return $this->render('view', [
             'model' => $this->findModel(<?= $actionParams ?>),
         ]);
@@ -155,7 +158,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
             }
         } else {
             Yii::$app->response->format = Response::FORMAT_HTML;
-            return $this->render('create', [
+            return $this->render('update', [
                 'model' => $model,
             ]);
         }

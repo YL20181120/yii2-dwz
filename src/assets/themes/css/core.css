@@ -314,11 +314,11 @@ a:hover {text-decoration:underline;}
 /* CSS Table */
 table.list {border-collapse:collapse; border:solid 1px #ededed;}
 table.list thead tr {background:url("../default/images/grid/tableth.png") repeat-x scroll 0 0 #F0EFF0;}
-table.list th {padding:1px 2px; line-height:21px; border-right: solid 1px #D0D0D0; border-bottom:solid 1px #D0D0D0; font-weight:bolder; }
-table.list td {padding:1px 2px; line-height:21px; border-right:solid 1px #ededed;}
+table.list th {word-break: keep-all;white-space:nowrap;padding:1px 2px; line-height:21px; border-right: solid 1px #D0D0D0; border-bottom:solid 1px #D0D0D0; font-weight:bolder;text-align: center;}
+table.list td {padding:1px 2px; line-height:21px; border-right:solid 1px #ededed;border-bottom:solid 1px #D0D0D0;}
 table.list th.asc, .grid .gridHeader th.asc{background-position: 100% 0; background:url(../default/images/order_up.gif) no-repeat right; cursor:pointer;}
 table.list th.desc, .grid .gridHeader th.desc{background-position: 100% 0; background:url(../default/images/order_down.gif) no-repeat right; cursor:pointer;}
-table.list tbody {background-color:#fff;}
+table.list tbody {background-color:#fff;overflow: auto;}
 table.list .right {text-align:right;}
 table.list .trbg {background-color:#F8F8F8;}
 table.list .hot {background-color:#fff5c0;}
@@ -378,8 +378,13 @@ select { border:1px solid; border-color: #A2BAC0 #B8D0D6 #B8D0D6 #A2BAC0}
 .inputDateButton { float:left; display:block; overflow:hidden; text-indent:-1000px; width:16px; height:21px; background-position:0 -100px;}
 .inputDateButton:hover { background-position:0 -150px;}
 
-span.error { display:block; overflow:hidden; width:300px; height:21px; padding:0 3px; line-height:21px; background:#F00; color:#FFF; position:absolute; top:5px; left:318px;}
+span.error { display:block; overflow:hidden; width:300px; height:21px; padding:0 3px; line-height:21px; background:#F00; color:#FFF; position:absolute; top:5px; left:490px;}
 label.alt {display:block; overflow:hidden; position:absolute;line-height:20px}
+label.primary {color:#fff;background: #0275d8;padding: 1px 5px;border-radius: 3px;}
+label.success {color:#fff;background: #5cb85c;padding: 1px 5px;border-radius: 3px;}
+label.info {color:#fff;background: #5bc0de;padding: 1px 5px;border-radius: 3px;}
+label.warning {color:#fff;background: #f0ad4e;padding: 1px 5px;border-radius: 3px;}
+label.danger {color:#fff;background: #d9534f;padding: 1px 5px;border-radius: 3px;}
 .nowrap span.error{position: static;}
 
 /* Button */
@@ -500,7 +505,7 @@ body { overflow:hidden;}
 .pageFormContent .radioGroup { float:left; display:block; overflow:hidden;}
 .pageFormContent label { float:left; width:120px; padding:0 5px; line-height:21px;}
 .pageFormContent label.radioButton { float:left; width:auto; padding:0 10px 0 0; line-height:21px;}
-.pageFormContent .textInput { float:left;}
+.pageFormContent .textInput { float:left;width: 300px;}
 .pageFormContent select { float:left;}
 .pageFormContent .inputInfo { padding:0 5px; line-height:21px;}
 .pageFormContent span.unit, .pageFormContent a.unit { padding:0 5px; line-height:21px;}

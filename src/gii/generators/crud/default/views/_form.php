@@ -26,7 +26,7 @@ use jasmine2\dwz\widgets\ActiveForm;
 
 
     <?= "<?php " ?>$form = ActiveForm::begin(); ?>
-    <input type="hidden" name="navTabId" value="3302edc7856266dddf251e85f278820824e930a7">
+    <input type="hidden" name="navTabId" value="<?= $generator->navTabId ?>">
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, $safeAttributes)) {
         echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";

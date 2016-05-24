@@ -23,7 +23,6 @@ $this->title = <?= $generator->generateString('Update {modelClass}: ', ['modelCl
 
     <?= "<?= " ?>$this->render('_form', [
         'model' => $model,
-        'errors'=> $errors,
     ]) ?>
 
 </div>

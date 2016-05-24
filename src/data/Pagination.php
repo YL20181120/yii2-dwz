@@ -16,7 +16,7 @@ class Pagination extends \yii\data\Pagination
 	public $pageSizeParam   = 'numPerPage';
 	public $pageParam       = 'pageNum';
 	public $defaultPageSize = 50;
-	public $pageSizeLimit   = [1,200];
+	public $pageSizeLimit   = [1,300];
 
 	/**
 	 * 为了从post中获取分页数据

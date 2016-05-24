@@ -15,7 +15,7 @@ class DetailView extends \yii\widgets\DetailView
 {
 	//分几列显示数据
 	public $columns = 1;
-	public $template = "<td><b>{label}</b></td><td>{value}</td>";
+	public $template = "<th>{label}</th><td>{value}</td>";
 	public $options = ['class' => 'list','style'=>'width:100%;'];
 	public function run()
 	{

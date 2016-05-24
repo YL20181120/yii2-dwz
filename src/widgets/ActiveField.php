@@ -80,4 +80,15 @@ class ActiveField extends \yii\widgets\ActiveField
 		return $this;
 	}
 
+	public function textarea($options = [])
+	{
+		Html::addCssClass($options, 'editor');
+		Html::addCssStyle($options, ['width' => '600px','height' => '300px']);
+		return parent::textarea($options);
+	}
+
+	public function combox($options = [])
+	{
+
+	}
 }
