@@ -34,7 +34,15 @@ class ActiveField extends \yii\widgets\ActiveField
 		$this->parts['{input}'] = Html::activeTextInput($this->model, $this->attribute, $options);
 		return $this;
 	}
+	public function passwordInput($options = [])
+	{
+		$options = array_merge($this->inputOptions, $options);
+		$this->adjustLabelFor($options);
+		$this->adjustValidateClass($options);
+		$this->parts['{input}'] = Html::activePasswordInput($this->model, $this->attribute, $options);
 
+		return $this;
+	}
 	public function adjustValidateClass(&$options)
 	{
 		foreach ($this->model->getActiveValidators($this->attribute) as $validator) {

@@ -127,7 +127,7 @@ class GridView extends BaseListView
 
 		if (empty($rows)) {
 			$colspan = count($this->columns);
-			return "<tbody>\n<tr><td colspan=\"$colspan\">" . $this->renderEmpty() . "</td></tr>\n</tbody>";
+			return "<tbody>\n<tr><td colspan=\"$colspan\" style='text-align: center;'>" . $this->renderEmpty() . "</td></tr>\n</tbody>";
 		} else {
 			return "<tbody>\n" . implode("\n", $rows) . "\n</tbody>";
 		}

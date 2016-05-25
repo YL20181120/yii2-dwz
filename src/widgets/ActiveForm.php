@@ -19,7 +19,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
 	public function init()
 	{
 		Html::addCssClass($this->options, 'pageForm required-validate');
-		$this->options['onsubmit'] = 'return validateCallback(this,navTabAjaxDone);';
+		isset($this->options['onsubmit'])?:$this->options['onsubmit'] = 'return validateCallback(this,navTabAjaxDone);';
 		parent::init();
 		echo '<div class="pageFormContent" layoutH="97">';
 	}
