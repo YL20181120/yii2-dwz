@@ -10,7 +10,9 @@ namespace jasmine2\dwz\widgets;
 
 use jasmine2\dwz\helpers\Html;
 use jasmine2\dwz\helpers\ArrayHelper;
+use jasmine2\dwz\validators\DigitsValidator;
 use yii\validators\EmailValidator;
+use yii\validators\NumberValidator;
 use yii\validators\RequiredValidator;
 use yii\validators\UrlValidator;
 
@@ -24,8 +26,7 @@ class ActiveField extends \yii\widgets\ActiveField
 	public $inputOptions = ['class' => ''];
 	public $labelOptions = ['class' => ''];
 	public $errorOptions = ['class' => ''];
-	public $hintOptions = ['class' => 'info'];
-	//public $template = "{label}\n{input}\n{error}";
+	public $hintOptions = ['class' => 'unit'];
 	public function textInput($options = [])
 	{
 		$options = array_merge($this->inputOptions, $options);
@@ -47,12 +48,17 @@ class ActiveField extends \yii\widgets\ActiveField
 	{
 		foreach ($this->model->getActiveValidators($this->attribute) as $validator) {
 			/* @var $validator \yii\validators\Validator */
-			if($validator instanceof RequiredValidator){
+			if ($validator instanceof RequiredValidator) {
 				Html::addCssClass($options, 'required');
-			} elseif($validator instanceof EmailValidator){
+			} elseif ($validator instanceof EmailValidator) {
 				Html::addCssClass($options, 'email');
-			} elseif($validator instanceof UrlValidator){
+			} elseif ($validator instanceof UrlValidator) {
 				Html::addCssClass($options, 'url');
+			} elseif ($validator instanceof NumberValidator) {
+				if($validator->integerOnly)
+					Html::addCssClass($options, 'digits');
+				else
+					Html::addCssClass($options, 'number');
 			}
 		}
 	}
@@ -95,8 +101,14 @@ class ActiveField extends \yii\widgets\ActiveField
 		return parent::textarea($options);
 	}
 
-	public function combox($options = [])
+	public function unit($content, $options = [])
 	{
-
+		$options = array_merge($this->hintOptions, $options);
+		$options['hint'] = $content;
+		if($content == "")
+			$this->parts['{hint}'] = $content;
+		else
+			$this->parts['{hint}'] = Html::tag('span',$content,$options);
+		return $this;
 	}
 }

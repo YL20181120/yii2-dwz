@@ -29,8 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php if ($generator->indexWidgetType === 'grid'): ?>
     <?= "<?= " ?>GridView::widget([
         'dataProvider' => $dataProvider,
+        <?php if(!empty($generator->searchModelClass)): ?>
         'search'  => $this->render('_search',['model' => $searchModel]),
-        'columns' =>[
+        <?php endif;?>'columns' =>[
             ['class' => 'yii\grid\SerialColumn'],
 
 <?php
