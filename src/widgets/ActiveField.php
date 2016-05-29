@@ -94,10 +94,12 @@ class ActiveField extends \yii\widgets\ActiveField
 		return $this;
 	}
 
-	public function textarea($options = [])
+	public function textarea($options = ['show' => true])
 	{
-		Html::addCssClass($options, 'editor');
-		Html::addCssStyle($options, ['width' => '600px','height' => '300px']);
+		if(isset($options['show']) && $options['show'] == true) {
+			Html::addCssClass($options, 'editor');
+			Html::addCssStyle($options, ['width' => '600px','height' => '300px']);
+		}
 		return parent::textarea($options);
 	}
 
@@ -110,5 +112,16 @@ class ActiveField extends \yii\widgets\ActiveField
 		else
 			$this->parts['{hint}'] = Html::tag('span',$content,$options);
 		return $this;
+	}
+
+	public function fileInput($options = [])
+	{
+		foreach ($this->model->getActiveValidators($this->attribute) as $validator) {
+			/* @var $validator \yii\validators\Validator */
+			if ($validator instanceof RequiredValidator) {
+				Html::addCssClass($options, 'required');
+			}
+		}
+		return parent::fileInput($options);
 	}
 }

@@ -128,7 +128,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 					width           : 120,                // The width of the browse button
 					
 					// Events
-					overrideEvents  : []             // (Array) A list of default event handlers to skip
+					overrideEvents  : [],             // (Array) A list of default event handlers to skip
 					/*
 					onCancel         // Triggered when a file is cancelled from the queue
 					onClearQueue     // Triggered during the 'clear queue' method
